@@ -84,7 +84,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("UC4 ordered consist operations completed...");
 
-        // === UC5: Preserve Insertion Order using LinkedHashSet ===
+        // === UC5 ===
         System.out.println("\n===============================================");
         System.out.println(" UC5 - Preserve Insertion Order of Bogies ");
         System.out.println("===============================================\n");
@@ -105,5 +105,25 @@ public class TrainConsistManagementApp {
         System.out.println("LinkedHashSet preserves insertion order and removes duplicates automatically.\n");
 
         System.out.println("UC5 formation setup completed...");
+
+        // === UC6: Map Bogie to Capacity using HashMap ===
+        System.out.println("\n===============================================");
+        System.out.println(" UC6 - Map Bogie to Capacity (HashMap) ");
+        System.out.println("===============================================\n");
+
+        java.util.HashMap<String, Integer> bogieCapacity = new java.util.HashMap<>();
+
+        bogieCapacity.put("Sleeper", 72);
+        bogieCapacity.put("AC Chair", 56);
+        bogieCapacity.put("First Class", 24);
+        bogieCapacity.put("Goods - Rectangular", 5000);
+        bogieCapacity.put("Goods - Cylindrical", 7000);
+
+        System.out.println("Bogie Capacity Mapping:");
+        for (java.util.Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
+            System.out.println(entry.getKey() + " → Capacity: " + entry.getValue());
+        }
+
+        System.out.println("\nUC6 bogie-capacity mapping completed successfully...");
     }
 }
