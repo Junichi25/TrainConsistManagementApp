@@ -153,6 +153,30 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("\nUC7 bogie sorting completed...");
+
+        // === UC8: Filter Passenger Bogies Using Streams ===
+        System.out.println("\n===============================================");
+        System.out.println(" UC8 - Filter Passenger Bogies Using Streams ");
+        System.out.println("===============================================\n");
+
+        // UC8 Goal: Select bogies with capacity > 60 using Stream API
+        System.out.println("Filtering bogies with capacity > 60...");
+
+        List<Bogie> highCapacityBogies = passengerBogieList.stream()
+                .filter(b -> b.getCapacity() > 60)   // Condition
+                .collect(java.util.stream.Collectors.toList());  // Collect results
+
+        System.out.println("\nFiltered Bogies (Capacity > 60):");
+
+        if (highCapacityBogies.isEmpty()) {
+            System.out.println("No bogies match the filtering criteria.");
+        } else {
+            for (Bogie b : highCapacityBogies) {
+                System.out.println(b.getName() + " - Capacity: " + b.getCapacity());
+            }
+        }
+
+        System.out.println("\nUC8 stream filtering completed successfully...");
     }
 }
 class Bogie {
