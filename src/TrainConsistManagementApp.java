@@ -177,6 +177,29 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("\nUC8 stream filtering completed successfully...");
+
+        // === UC9: Group Bogies by Type (Collectors.groupingBy) ===
+        System.out.println("\n===============================================");
+        System.out.println(" UC9 - Group Bogies by Type (Collectors.groupingBy) ");
+        System.out.println("===============================================\n");
+
+        System.out.println("Grouping passenger bogies by type...");
+
+        // Using groupingBy to categorize bogies by name (type)
+        java.util.Map<String, List<Bogie>> groupedBogies =
+                passengerBogieList.stream()
+                        .collect(java.util.stream.Collectors.groupingBy(Bogie::getName));
+
+        // Display grouped bogies
+        System.out.println("\nGrouped Bogie Structure:");
+        for (java.util.Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println("\nCategory: " + entry.getKey());
+            for (Bogie b : entry.getValue()) {
+                System.out.println(" - " + b.getName() + " | Capacity: " + b.getCapacity());
+            }
+        }
+
+        System.out.println("\nUC9 bogie grouping completed successfully...");
     }
 }
 class Bogie {
