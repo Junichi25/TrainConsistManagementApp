@@ -125,5 +125,50 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("\nUC6 bogie-capacity mapping completed successfully...");
+
+        // === UC7: Sort Bogies by Capacity (Comparator) ===
+        System.out.println("\n===============================================");
+        System.out.println(" UC7 - Sort Bogies by Capacity (Comparator) ");
+        System.out.println("===============================================\n");
+
+        // Create a list of Bogie objects
+        List<Bogie> passengerBogieList = new ArrayList<>();
+
+        // Add bogies with capacity
+        passengerBogieList.add(new Bogie("Sleeper", 72));
+        passengerBogieList.add(new Bogie("AC Chair", 56));
+        passengerBogieList.add(new Bogie("First Class", 24));
+
+        System.out.println("Passenger Bogies Before Sorting:");
+        for (Bogie b : passengerBogieList) {
+            System.out.println(b.getName() + " - Capacity: " + b.getCapacity());
+        }
+
+        // Sort by capacity (ascending)
+        passengerBogieList.sort(java.util.Comparator.comparingInt(Bogie::getCapacity));
+
+        System.out.println("\nPassenger Bogies After Sorting by Capacity:");
+        for (Bogie b : passengerBogieList) {
+            System.out.println(b.getName() + " - Capacity: " + b.getCapacity());
+        }
+
+        System.out.println("\nUC7 bogie sorting completed...");
+    }
+}
+class Bogie {
+    private String name;
+    private int capacity;
+
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 }
