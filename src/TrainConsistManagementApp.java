@@ -200,6 +200,26 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("\nUC9 bogie grouping completed successfully...");
+
+        // === UC10: Count Total Seats in Train (reduce) ===
+        System.out.println("\n===============================================");
+        System.out.println(" UC10 - Count Total Seats in Train (reduce) ");
+        System.out.println("===============================================\n");
+
+        System.out.println("Calculating total seating capacity across all passenger bogies...");
+
+        // Stream Steps:
+        // 1. stream()   → convert list to stream
+        // 2. map()      → extract capacity values
+        // 3. reduce()   → sum all capacities
+
+        int totalSeats = passengerBogieList.stream()
+                .map(b -> b.getCapacity())         // extract integer capacities
+                .reduce(0, Integer::sum);          // accumulate into a total
+
+        System.out.println("Total Seating Capacity in Train: " + totalSeats);
+
+        System.out.println("\nUC10 total seat aggregation completed successfully...");
     }
 }
 class Bogie {
