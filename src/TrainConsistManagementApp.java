@@ -109,7 +109,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("UC5 formation setup completed...");
 
-        // === UC6: Map Bogie to Capacity using HashMap ===
+        // === UC6 ===
         System.out.println("\n===============================================");
         System.out.println(" UC6 - Map Bogie to Capacity (HashMap) ");
         System.out.println("===============================================\n");
@@ -129,7 +129,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC6 bogie-capacity mapping completed successfully...");
 
-        // === UC7: Sort Bogies by Capacity (Comparator) ===
+        // === UC7 ===
         System.out.println("\n===============================================");
         System.out.println(" UC7 - Sort Bogies by Capacity (Comparator) ");
         System.out.println("===============================================\n");
@@ -154,7 +154,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC7 bogie sorting completed...");
 
-        // === UC8: Filter Passenger Bogies Using Streams ===
+        // === UC8 ===
         System.out.println("\n===============================================");
         System.out.println(" UC8 - Filter Passenger Bogies Using Streams ");
         System.out.println("===============================================\n");
@@ -177,7 +177,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC8 stream filtering completed successfully...");
 
-        // === UC9: Group Bogies by Type (Collectors.groupingBy) ===
+        // === UC9 ===
         System.out.println("\n===============================================");
         System.out.println(" UC9 - Group Bogies by Type (Collectors.groupingBy) ");
         System.out.println("===============================================\n");
@@ -198,7 +198,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC9 bogie grouping completed successfully...");
 
-        // === UC10: Count Total Seats ===
+        // === UC10 ===
         System.out.println("\n===============================================");
         System.out.println(" UC10 - Count Total Seats in Train (reduce) ");
         System.out.println("===============================================\n");
@@ -211,9 +211,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC10 total seat aggregation completed successfully...");
 
-        // =========================================================================================
-        // === UC11: Validate Train ID & Cargo Code Using Regex
-        // =========================================================================================
+        // === UC11 ===
         System.out.println("\n===============================================");
         System.out.println(" UC11 - Validate Train ID and Cargo Code (Regex) ");
         System.out.println("===============================================\n");
@@ -226,11 +224,9 @@ public class TrainConsistManagementApp {
         System.out.print("Enter Cargo Code (Format: PET-AB): ");
         String cargoCode = scanner.nextLine();
 
-        // Regex patterns
         Pattern trainPattern = Pattern.compile("TRN-\\d{4}");
         Pattern cargoPattern = Pattern.compile("PET-[A-Z]{2}");
 
-        // Create matchers
         Matcher matchTrain = trainPattern.matcher(trainId);
         Matcher matchCargo = cargoPattern.matcher(cargoCode);
 
@@ -244,14 +240,11 @@ public class TrainConsistManagementApp {
         System.out.println("\nUC11 validation completed...");
 
         scanner.close();
-        // =========================================================================================
-        // === UC12: Safety Compliance Check for Goods Bogies (Streams + allMatch + Lambda)
-        // =========================================================================================
 
+        // === UC12 ===
         System.out.println("\n===============================================");
         System.out.println(" UC12 - Safety Compliance Check for Goods Bogies ");
         System.out.println("===============================================\n");
-
 
         class GoodsBogie {
             String type;
@@ -290,6 +283,56 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("UC12 safety validation completed...");
+
+        // =========================================================================================
+        // === UC13: Performance Comparison (Loops vs Streams)
+        // =========================================================================================
+        System.out.println("\n===============================================");
+        System.out.println(" UC13 - Performance Comparison (Loops vs Streams) ");
+        System.out.println("===============================================\n");
+
+        List<Bogie> testBogies = new ArrayList<>();
+        testBogies.add(new Bogie("Sleeper", 72));
+        testBogies.add(new Bogie("AC Chair", 56));
+        testBogies.add(new Bogie("First Class", 24));
+        testBogies.add(new Bogie("Executive", 80));
+
+        System.out.println("Filtering bogies with capacity > 60...\n");
+
+        // Loop-based filtering
+        long startLoop = System.nanoTime();
+        List<Bogie> loopFiltered = new ArrayList<>();
+        for (Bogie b : testBogies) {
+            if (b.getCapacity() > 60) {
+                loopFiltered.add(b);
+            }
+        }
+        long endLoop = System.nanoTime();
+
+        // Stream-based filtering
+        long startStream = System.nanoTime();
+        List<Bogie> streamFiltered = testBogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(java.util.stream.Collectors.toList());
+        long endStream = System.nanoTime();
+
+        System.out.println("Loop Filtered Bogies:");
+        for (Bogie b : loopFiltered) {
+            System.out.println(" - " + b.getName() + " | Capacity: " + b.getCapacity());
+        }
+
+        System.out.println("\nStream Filtered Bogies:");
+        for (Bogie b : streamFiltered) {
+            System.out.println(" - " + b.getName() + " | Capacity: " + b.getCapacity());
+        }
+
+        long loopTime = endLoop - startLoop;
+        long streamTime = endStream - startStream;
+
+        System.out.println("\nExecution Time (Loop):   " + loopTime + " ns");
+        System.out.println("Execution Time (Stream): " + streamTime + " ns");
+
+        System.out.println("\nUC13 performance benchmarking completed...");
     }
 }
 
@@ -309,5 +352,4 @@ class Bogie {
     public int getCapacity() {
         return capacity;
     }
-
 }
