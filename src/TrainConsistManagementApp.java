@@ -311,15 +311,12 @@ public class TrainConsistManagementApp {
         GoodsBogieUC15 rectBogie = new GoodsBogieUC15("Rectangular");
         GoodsBogieUC15 cylBogie = new GoodsBogieUC15("Cylindrical");
 
-        // Safe Assignment
         System.out.println("\n--- Test Case: Safe Cargo Assignment ---");
         rectBogie.assignCargo("Coal");
 
-        // Unsafe Assignment (Petroleum in Rectangular)
         System.out.println("\n--- Test Case: Unsafe Cargo Assignment (Should Trigger Exception) ---");
         rectBogie.assignCargo("Petroleum");
 
-        // Safe Petroleum assignment in Cylindrical
         System.out.println("\n--- Test Case: Valid Petroleum Assignment ---");
         cylBogie.assignCargo("Petroleum");
 
@@ -362,6 +359,36 @@ public class TrainConsistManagementApp {
         System.out.println(java.util.Arrays.toString(bogieNames));
 
         System.out.println("\nUC17 built-in Java sorting completed...");
+
+        // ======================================================================
+        // === UC18 =============================================================
+        // ======================================================================
+        System.out.println("\n===============================================");
+        System.out.println(" UC18 - Linear Search for Bogie ID (Array-Based Searching) ");
+        System.out.println("===============================================\n");
+
+        String[] bogieIdArray = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+
+        System.out.println("Available Bogie IDs:");
+        System.out.println(java.util.Arrays.toString(bogieIdArray));
+
+        String searchKey = "BG309"; // Example search key
+
+        boolean found = false;
+
+        for (int i = 0; i < bogieIdArray.length; i++) {
+            if (bogieIdArray[i].equals(searchKey)) {
+                found = true;
+                System.out.println("\nBogie ID Found at Position: " + i);
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("\nBogie ID NOT FOUND in the consist.");
+        }
+
+        System.out.println("UC18 linear search completed...");
     }
 
     // Bubble Sort Implementation for UC16
@@ -473,7 +500,6 @@ class GoodsBogieUC15 {
         System.out.println("Attempting cargo assignment → Shape: " + shape + ", Cargo: " + cargo);
 
         try {
-            // Safety Rule
             if (shape.equalsIgnoreCase("Rectangular") &&
                     cargo.equalsIgnoreCase("Petroleum")) {
 
