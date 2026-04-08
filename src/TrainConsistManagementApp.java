@@ -343,6 +343,25 @@ public class TrainConsistManagementApp {
         printArray(capacities);
 
         System.out.println("\nUC16 bubble sort demonstration completed...");
+
+        // ======================================================================
+        // === UC17 =============================================================
+        // ======================================================================
+        System.out.println("\n===============================================");
+        System.out.println(" UC17 - Sort Bogie Names Using Arrays.sort() ");
+        System.out.println("===============================================\n");
+
+        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+
+        System.out.println("Before Sorting (Original Bogie Names):");
+        System.out.println(java.util.Arrays.toString(bogieNames));
+
+        java.util.Arrays.sort(bogieNames);
+
+        System.out.println("\nAfter Sorting Using Arrays.sort():");
+        System.out.println(java.util.Arrays.toString(bogieNames));
+
+        System.out.println("\nUC17 built-in Java sorting completed...");
     }
 
     // Bubble Sort Implementation for UC16
