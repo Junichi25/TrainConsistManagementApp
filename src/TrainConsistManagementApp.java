@@ -244,6 +244,52 @@ public class TrainConsistManagementApp {
         System.out.println("\nUC11 validation completed...");
 
         scanner.close();
+        // =========================================================================================
+        // === UC12: Safety Compliance Check for Goods Bogies (Streams + allMatch + Lambda)
+        // =========================================================================================
+
+        System.out.println("\n===============================================");
+        System.out.println(" UC12 - Safety Compliance Check for Goods Bogies ");
+        System.out.println("===============================================\n");
+
+
+        class GoodsBogie {
+            String type;
+            String cargo;
+
+            GoodsBogie(String type, String cargo) {
+                this.type = type;
+                this.cargo = cargo;
+            }
+        }
+
+        List<GoodsBogie> goodsBogies = new ArrayList<>();
+
+        goodsBogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
+        goodsBogies.add(new GoodsBogie("Open", "Coal"));
+        goodsBogies.add(new GoodsBogie("Box", "Grain"));
+        goodsBogies.add(new GoodsBogie("Cylindrical", "Coal"));
+
+        System.out.println("Goods Bogies in Train:");
+        for (GoodsBogie gb : goodsBogies) {
+            System.out.println(gb.type + " -> " + gb.cargo);
+        }
+
+        boolean isSafe = goodsBogies.stream()
+                .allMatch(gb ->
+                        !gb.type.equalsIgnoreCase("Cylindrical") ||
+                                gb.cargo.equalsIgnoreCase("Petroleum")
+                );
+
+        System.out.println("\nSafety Compliance Status: " + isSafe);
+
+        if (isSafe) {
+            System.out.println("Train Formation is SAFE.");
+        } else {
+            System.out.println("Train Formation is NOT SAFE.");
+        }
+
+        System.out.println("UC12 safety validation completed...");
     }
 }
 
@@ -263,4 +309,5 @@ class Bogie {
     public int getCapacity() {
         return capacity;
     }
+
 }
