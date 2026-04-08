@@ -405,6 +405,48 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("UC19 binary search completed...");
+
+        // ======================================================================
+        // === UC20 =============================================================
+        // ======================================================================
+        System.out.println("\n===============================================");
+        System.out.println(" UC20 - Safe Bogie Search with Exception Handling ");
+        System.out.println("===============================================\n");
+
+        // Data for UC20 (you can modify if needed)
+        String[] uc20BogieList = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        String targetUC20 = "BG309";
+
+        try {
+            // Check for empty list
+            if (uc20BogieList.length == 0) {
+                throw new IllegalStateException("ERROR: Bogie list is EMPTY. Cannot perform search.");
+            }
+
+            // Perform linear search
+            int indexUC20 = -1;
+
+            for (int i = 0; i < uc20BogieList.length; i++) {
+                if (uc20BogieList[i].equals(targetUC20)) {
+                    indexUC20 = i;
+                    break;
+                }
+            }
+
+            // Output result
+            if (indexUC20 != -1) {
+                System.out.println("UC20 Search Result → Bogie " + targetUC20 +
+                        " FOUND at index: " + indexUC20);
+            } else {
+                System.out.println("UC20 Search Result → Bogie " + targetUC20 +
+                        " NOT FOUND in the list.");
+            }
+
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("UC20 safe-search with exception handling completed...");
     }
 
     // Bubble Sort for UC16
