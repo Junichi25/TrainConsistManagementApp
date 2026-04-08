@@ -301,9 +301,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("UC14 custom exception handling completed...");
 
-        // ======================================================================
-        // === UC15 =============================================================
-        // ======================================================================
+        // === UC15 ===
         System.out.println("\n===============================================");
         System.out.println(" UC15 - Safe Cargo Assignment Using try-catch-finally ");
         System.out.println("===============================================\n");
@@ -322,9 +320,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC15 safe runtime exception handling completed...");
 
-        // ======================================================================
-        // === UC16 =============================================================
-        // ======================================================================
+        // === UC16 ===
         System.out.println("\n===============================================");
         System.out.println(" UC16 - Sort Passenger Bogies by Capacity (Bubble Sort) ");
         System.out.println("===============================================\n");
@@ -341,9 +337,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC16 bubble sort demonstration completed...");
 
-        // ======================================================================
-        // === UC17 =============================================================
-        // ======================================================================
+        // === UC17 ===
         System.out.println("\n===============================================");
         System.out.println(" UC17 - Sort Bogie Names Using Arrays.sort() ");
         System.out.println("===============================================\n");
@@ -360,9 +354,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nUC17 built-in Java sorting completed...");
 
-        // ======================================================================
-        // === UC18 =============================================================
-        // ======================================================================
+        // === UC18 ===
         System.out.println("\n===============================================");
         System.out.println(" UC18 - Linear Search for Bogie ID (Array-Based Searching) ");
         System.out.println("===============================================\n");
@@ -372,7 +364,7 @@ public class TrainConsistManagementApp {
         System.out.println("Available Bogie IDs:");
         System.out.println(java.util.Arrays.toString(bogieIdArray));
 
-        String searchKey = "BG309"; // Example search key
+        String searchKey = "BG309";
 
         boolean found = false;
 
@@ -389,11 +381,34 @@ public class TrainConsistManagementApp {
         }
 
         System.out.println("UC18 linear search completed...");
+
+        // ======================================================================
+        // === UC19 =============================================================
+        // ======================================================================
+        System.out.println("\n===============================================");
+        System.out.println(" UC19 - Binary Search on Sorted Bogie IDs ");
+        System.out.println("===============================================\n");
+
+        String[] sortedBogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+
+        System.out.println("Available Sorted Bogie IDs:");
+        System.out.println(java.util.Arrays.toString(sortedBogieIds));
+
+        String key = "BG412";
+
+        int result = java.util.Arrays.binarySearch(sortedBogieIds, key);
+
+        if (result >= 0) {
+            System.out.println("\nBinary Search Result → Bogie ID found at index: " + result);
+        } else {
+            System.out.println("\nBinary Search Result → Bogie ID NOT FOUND");
+        }
+
+        System.out.println("UC19 binary search completed...");
     }
 
-    // Bubble Sort Implementation for UC16
+    // Bubble Sort for UC16
     public static void bubbleSort(int[] arr) {
-
         int n = arr.length;
 
         for (int i = 0; i < n - 1; i++) {
@@ -410,7 +425,7 @@ public class TrainConsistManagementApp {
         }
     }
 
-    // Helper Method to Print Array for UC16
+    // Print Array for UC16
     public static void printArray(int[] arr) {
         for (int value : arr) {
             System.out.print(value + " ");
@@ -418,7 +433,6 @@ public class TrainConsistManagementApp {
         System.out.println();
     }
 }
-
 
 // ======================================================================
 // Custom Exception for UC14
