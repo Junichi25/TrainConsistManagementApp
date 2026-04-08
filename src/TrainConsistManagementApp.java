@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class TrainConsistManagementApp {
 
@@ -52,7 +51,6 @@ public class TrainConsistManagementApp {
 
         System.out.println("Bogie IDs After Insertion:");
         System.out.println(bogieIds);
-
         System.out.println("Note: Duplicates are automatically ignored by HashSet.");
         System.out.println("UC3 uniqueness validation completed....");
 
@@ -98,7 +96,6 @@ public class TrainConsistManagementApp {
 
         System.out.println("Final Train Formation:");
         System.out.println(formation + "\n");
-
         System.out.println("UC5 formation setup completed...");
 
         // === UC6 ===
@@ -138,7 +135,7 @@ public class TrainConsistManagementApp {
 
         passengerBogieList.sort(java.util.Comparator.comparingInt(Bogie::getCapacity));
 
-        System.out.println("\nPassenger Bogies After Sorting by Capacity:");
+        System.out.println("\nPassenger Bogies After Sorting:");
         for (Bogie b : passengerBogieList) {
             System.out.println(b.getName() + " - Capacity: " + b.getCapacity());
         }
@@ -190,7 +187,7 @@ public class TrainConsistManagementApp {
                 .reduce(0, Integer::sum);
 
         System.out.println("Total Seating Capacity in Train: " + totalSeats);
-        System.out.println("\nUC10 total seat aggregation completed successfully...");
+        System.out.println("\nUC10 total seat aggregation completed...");
 
         // === UC11 ===
         System.out.println("\n===============================================");
@@ -277,11 +274,8 @@ public class TrainConsistManagementApp {
                 .collect(java.util.stream.Collectors.toList());
         long endStream = System.nanoTime();
 
-        long loopTime = endLoop - startLoop;
-        long streamTime = endStream - startStream;
-
-        System.out.println("Loop Execution Time:   " + loopTime + " ns");
-        System.out.println("Stream Execution Time: " + streamTime + " ns");
+        System.out.println("Loop Execution Time:   " + (endLoop - startLoop) + " ns");
+        System.out.println("Stream Execution Time: " + (endStream - startStream) + " ns");
         System.out.println("UC13 performance benchmarking completed...");
 
         // === UC14 ===
@@ -305,9 +299,34 @@ public class TrainConsistManagementApp {
             System.out.println("ERROR: Should not happen for valid data.");
         }
 
-        System.out.println("\nUC14 custom exception handling completed...");
+        System.out.println("UC14 custom exception handling completed...");
+
+        // ======================================================================
+        // === UC15 =============================================================
+        // ======================================================================
+        System.out.println("\n===============================================");
+        System.out.println(" UC15 - Safe Cargo Assignment Using try-catch-finally ");
+        System.out.println("===============================================\n");
+
+        GoodsBogieUC15 rectBogie = new GoodsBogieUC15("Rectangular");
+        GoodsBogieUC15 cylBogie = new GoodsBogieUC15("Cylindrical");
+
+        // Safe Assignment
+        System.out.println("\n--- Test Case: Safe Cargo Assignment ---");
+        rectBogie.assignCargo("Coal");
+
+        // Unsafe Assignment (Petroleum in Rectangular)
+        System.out.println("\n--- Test Case: Unsafe Cargo Assignment (Should Trigger Exception) ---");
+        rectBogie.assignCargo("Petroleum");
+
+        // Safe Petroleum assignment in Cylindrical
+        System.out.println("\n--- Test Case: Valid Petroleum Assignment ---");
+        cylBogie.assignCargo("Petroleum");
+
+        System.out.println("\nUC15 safe runtime exception handling completed...");
     }
 }
+
 
 // ======================================================================
 // Custom Exception for UC14
@@ -319,7 +338,7 @@ class InvalidCapacityException extends Exception {
 }
 
 // ======================================================================
-// Passenger Bogie Class for UC14 (Validates Capacity)
+// Passenger Bogie Class for UC14
 // ======================================================================
 class PassengerBogieUC14 {
     private String type;
@@ -343,7 +362,7 @@ class PassengerBogieUC14 {
 }
 
 // ======================================================================
-// Existing Bogie Class (UC7–UC13)
+// Existing Bogie Class (Used in UC7–UC13)
 // ======================================================================
 class Bogie {
     private String name;
@@ -360,5 +379,52 @@ class Bogie {
 
     public int getCapacity() {
         return capacity;
+    }
+}
+
+// ======================================================================
+// UC15 - Custom Runtime Exception
+// ======================================================================
+class CargoSafetyException extends RuntimeException {
+    public CargoSafetyException(String message) {
+        super(message);
+    }
+}
+
+// ======================================================================
+// UC15 - Goods Bogie with Runtime Safety Check
+// ======================================================================
+class GoodsBogieUC15 {
+
+    private String shape;
+    private String cargo;
+
+    public GoodsBogieUC15(String shape) {
+        this.shape = shape;
+    }
+
+    public void assignCargo(String cargo) {
+
+        System.out.println("Attempting cargo assignment → Shape: " + shape + ", Cargo: " + cargo);
+
+        try {
+            // Safety Rule
+            if (shape.equalsIgnoreCase("Rectangular") &&
+                    cargo.equalsIgnoreCase("Petroleum")) {
+
+                throw new CargoSafetyException(
+                        "UNSAFE ASSIGNMENT: Petroleum cannot be stored in Rectangular bogies!");
+            }
+
+            this.cargo = cargo;
+            System.out.println("Cargo Assigned Successfully: " + cargo);
+
+        } catch (CargoSafetyException e) {
+            System.out.println("ERROR: " + e.getMessage());
+            System.out.println("Cargo NOT assigned due to violation.");
+
+        } finally {
+            System.out.println("Cargo Validation Completed (finally block executed).");
+        }
     }
 }
