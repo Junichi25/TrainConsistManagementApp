@@ -324,6 +324,52 @@ public class TrainConsistManagementApp {
         cylBogie.assignCargo("Petroleum");
 
         System.out.println("\nUC15 safe runtime exception handling completed...");
+
+        // ======================================================================
+        // === UC16 =============================================================
+        // ======================================================================
+        System.out.println("\n===============================================");
+        System.out.println(" UC16 - Sort Passenger Bogies by Capacity (Bubble Sort) ");
+        System.out.println("===============================================\n");
+
+        int[] capacities = {72, 56, 24, 70, 60};
+
+        System.out.println("Before Sorting (Original Capacities):");
+        printArray(capacities);
+
+        bubbleSort(capacities);
+
+        System.out.println("\nAfter Sorting (Bubble Sort Result):");
+        printArray(capacities);
+
+        System.out.println("\nUC16 bubble sort demonstration completed...");
+    }
+
+    // Bubble Sort Implementation for UC16
+    public static void bubbleSort(int[] arr) {
+
+        int n = arr.length;
+
+        for (int i = 0; i < n - 1; i++) {
+
+            for (int j = 0; j < n - i - 1; j++) {
+
+                if (arr[j] > arr[j + 1]) {
+
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    // Helper Method to Print Array for UC16
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }
 
